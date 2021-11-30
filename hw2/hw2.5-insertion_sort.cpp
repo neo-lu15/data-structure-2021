@@ -69,16 +69,22 @@ int main()
 	for( int i = 10 ; i < 31 ; i++){
 		int *arr = new int[(int) pow(2,i)];
 		clock_t st,en;
+		
+		//check insert time
 		st = clock();
 		for(int j = 0 ; j < pow(2,i) ; ++j)
 			arr[j] = (rand()%(int)pow(2,30))+1;
 		insertionSort(arr, (int)pow(2,i));
 		en = clock();
+		
 		cout <<"insert"<< ((double)(en - st) / CLOCKS_PER_SEC) << "\n";
+		//check search time
 		st = clock();
 		for(int j =0 ; j< 100000;++j)
 			binarySearch(arr, 0, (int)pow(2,i) - 1,(rand()%(int)pow(2,30))+1 );
 		en = clock();
+		
+		//delete the array
 		delete arr;
 		cout<<"search" << ((double)(en - st) / CLOCKS_PER_SEC) << "\n";
 		cout << endl;
