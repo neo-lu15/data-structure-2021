@@ -254,7 +254,7 @@ int main(){
 
 	// Seed random number generator
 	srand(time(NULL));
-	cout <<"skip 0.5\n";
+	cout <<"skip 0.1\n";
 
 	
 
@@ -265,7 +265,7 @@ int main(){
 		for(int j = 0 ; j < pow(2,i) ; ++j)
 			arr[j] = (rand()%(int)pow(2,30))+1;
 		//create SkipList object with MAXLVL and P
-		SkipList lst(10000, 0.1:);  
+		SkipList lst(10000, 0.1);  // change the probability to 0.1
 		
 		clock_t st,en;
 		//check time of insert
