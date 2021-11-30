@@ -168,26 +168,30 @@ int main(){
 
 	cout <<"treap\n";
 	for( int i = 10 ; i < 31 ; i++){
-	
+		//declare a new array size of 2^i	
 		int *arr = new int[(int) pow(2,i)];
 		clock_t st,en;
+		//declare a NULL treap
 		struct TreapNode *root = NULL;
+		//check insert time
 		st = clock();
 		for(int j = 0 ; j < (int)pow(2,i) ; ++j){
 			arr[j] = (rand()%(int)pow(2,30))+1;
 			root =insert(root, arr[j]);
-			
 		}
 		en = clock();
 		cout <<"insert"<< ((double)(en - st) / CLOCKS_PER_SEC) << "\n";
+		
+		//check search time
 		st = clock();
 		for(int j =0 ; j< 100000;++j){
 			struct TreapNode  *s=search(root,(rand()%(int)pow(2,30))+1 );
 				
 		}
 		en = clock();
-			
 		cout <<"search" <<((double)(en - st) / CLOCKS_PER_SEC) << "\n";
+		
+		//delete treap and array
 		for(int j = 0; j<(int)pow(2,i);++j)
 			root = deleteNode(root, arr[j]);
 		delete [] arr;
