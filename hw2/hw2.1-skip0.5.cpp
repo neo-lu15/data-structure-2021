@@ -146,7 +146,7 @@ void SkipList::insertElement(int key)
 			n->forward[i] = update[i]->forward[i];
 			update[i]->forward[i] = n;
 		}
-		//		cout<<"Successfully Inserted key "<<key<<"\n"; no need
+		//cout<<"Successfully Inserted key "<<key<<"\n"; no need
 	}
 };
 
@@ -256,37 +256,43 @@ int main(){
 	srand(time(NULL));
 	cout <<"skip 0.5\n";
 
-	// create SkipList object with MAXLVL and P
+	
 
 	for( int i = 10 ; i < 31 ; i++){
 		cout << i<<endl;
 		int *arr = new int[(int) pow(2,i)];
-
+		//rand all data
 		for(int j = 0 ; j < pow(2,i) ; ++j)
 			arr[j] = (rand()%(int)pow(2,30))+1;
+		//create SkipList object with MAXLVL and P
 		SkipList lst(10000, 0.5);  
-
+		
 		clock_t st,en;
-
+		//check time of insert
 		st = clock();
 		for(int j = 0;  j < pow(2,i) ; ++j)
 			lst.insertElement(arr[j]);
 		en = clock();
+
 		cout <<"level:"<<lst.getlevel()<<"\n";
 		cout << ((double)(en - st) / CLOCKS_PER_SEC) << "\n";
-		double t = 0;
-		cout << "cpl:"<< lst.cpl/(double)pow(2,i)<<endl;
-		st = clock();
 		
+		//print the average of addtional copy
+		cout << "cpl:"<< lst.cpl/(double)pow(2,i)<<endl;
+		
+		//check the search time
+		st = clock();
 		for( int k = 0 ; k < 100000;++k){
 			lst.searchElement((rand()%(int)pow(2,30))+1);	
 		}
 		en = clock();
 
 		cout << ((double)(en - st) / CLOCKS_PER_SEC) << "\n";
+		// delete the entire list to prevent memory overload
 		for(int j = 0 ; j < pow(2,i); ++j){
 			lst.deleteElement(arr[j]);
 		}
+		//delete the rand array 
 		delete [] arr;
 		cout <<endl;
 
